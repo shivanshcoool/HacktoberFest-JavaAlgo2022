@@ -1,4 +1,4 @@
-public class SinglyLinkedList {
+public class DeletionInSinglyLinkedList {
 
     private class Node{
         private int value;
@@ -19,7 +19,7 @@ public class SinglyLinkedList {
 
     int size;
 
-    public SinglyLinkedList(){
+    public DeletionInSinglyLinkedList(){
         this.size = 0;
     }
 
@@ -42,6 +42,42 @@ public class SinglyLinkedList {
         tail.next = node;
         tail = node;
         ++size;
+    }
+
+    public int deleteFirst(){
+        int value = head.value;
+        head = head.next;
+
+        if(head == null)    tail = null;
+
+        --size;
+
+        return value;
+    }
+
+    public Node get(int index){
+        Node temp = head;
+
+        for(int i = 0 ; i< index ; ++i)
+            temp = temp.next;
+            
+        return temp;
+    }
+    
+    public int deleteLast(){
+        
+        if(size<=1){
+            return deleteFirst();
+        }
+
+        int value = tail.value;
+
+        tail = get(size-2);     //getting back a pointer to a node at a particular index
+        tail.next = null;
+
+        --size;
+
+        return value;
     }
 
     public void display(){
